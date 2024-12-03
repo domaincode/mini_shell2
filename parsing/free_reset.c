@@ -6,7 +6,7 @@
 /*   By: kbelmajd <kbelmajd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 01:26:22 by kbelmajd          #+#    #+#             */
-/*   Updated: 2024/12/03 17:19:38 by kbelmajd         ###   ########.fr       */
+/*   Updated: 2024/12/03 18:58:51 by kbelmajd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ void	exec_free_reset(t_data *data)
 	ft_free_stack(data->cmd);
 	free_cmd(&data->cmd);
 	free_token(&data->token);
-	// free(line);
 	if (data->envp)
 		free(data->envp);
 	g_signal.g_signal_pid = 0;

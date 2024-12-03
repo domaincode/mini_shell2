@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dollar_replace.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-mans <mel-mans@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kbelmajd <kbelmajd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 00:20:18 by mel-mans          #+#    #+#             */
-/*   Updated: 2024/12/03 00:20:19 by mel-mans         ###   ########.fr       */
+/*   Updated: 2024/12/03 18:58:30 by kbelmajd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,9 @@ int	replace_dollar(char **line, t_data *data)
 	str = ft_strdup("");
 	while ((*line)[i])
 	{
+		if ((*line)[i] && (*line)[i + 1] && (*line)[i] == '$' && \
+		(*line)[i + 1] == '\'' && i > 0 && (*line)[i - 1] != '\'')
+			i++;
 		quoting_choice(&dq, &data->sq, NULL, (*line)[i]);
 		if ((*line)[i] && (*line)[i + 1] && (*line)[i] == '$' && ((*line)[i
 				+ 1] != '\'' && (*line)[i + 1] != '"') && (ft_isalpha((*line)[i

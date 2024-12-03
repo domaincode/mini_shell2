@@ -6,7 +6,7 @@
 /*   By: kbelmajd <kbelmajd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 01:36:50 by kbelmajd          #+#    #+#             */
-/*   Updated: 2024/12/03 17:19:45 by kbelmajd         ###   ########.fr       */
+/*   Updated: 2024/12/03 18:59:27 by kbelmajd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ int	main(int argc, char **argv, char **env)
 			return (0);
 		while (1)
 		{
-			 data.cmd = NULL;
+			data.cmd = NULL;
 			line = readline("minishell> ");
 			if (g_signal.signal_flag)
 				data.exit_code = 130;

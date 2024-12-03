@@ -6,7 +6,7 @@
 /*   By: kbelmajd <kbelmajd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 00:21:58 by mel-mans          #+#    #+#             */
-/*   Updated: 2024/12/03 17:19:53 by kbelmajd         ###   ########.fr       */
+/*   Updated: 2024/12/03 19:55:47 by kbelmajd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@
 # include <sys/stat.h>
 # include <sys/types.h>
 # include <sys/wait.h>
-//#include "../exec/exec.h"
 # include <errno.h>
 
 typedef struct s_token
@@ -117,5 +116,6 @@ bool				get_infile(t_data *data, t_token *token, t_cmd *cmd);
 void				signals(void);
 void				exec_free_reset(t_data *data);
 void				free_cmd_circle(t_cmd **list);
+void				signals2(void);
 
 #endif

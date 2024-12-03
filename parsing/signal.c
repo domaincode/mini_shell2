@@ -6,7 +6,7 @@
 /*   By: kbelmajd <kbelmajd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 00:22:07 by mel-mans          #+#    #+#             */
-/*   Updated: 2024/12/03 15:20:09 by kbelmajd         ###   ########.fr       */
+/*   Updated: 2024/12/03 19:56:18 by kbelmajd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,4 +34,9 @@ void	signals(void)
 {
 	signal(SIGINT, &handle_sigint);
 	signal(SIGQUIT, SIG_IGN);
+}
+
+void	signals2(void)
+{
+	signal(SIGQUIT, SIG_DFL);
 }

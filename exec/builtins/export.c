@@ -6,7 +6,7 @@
 /*   By: kbelmajd <kbelmajd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 17:52:59 by kbelmajd          #+#    #+#             */
-/*   Updated: 2024/12/03 13:34:03 by kbelmajd         ###   ########.fr       */
+/*   Updated: 2024/12/03 21:11:57 by kbelmajd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,23 +62,26 @@ int	ft_set_envirements(t_env *env, char **cmd_param)
 	int		i;
 	t_env	*new;
 	t_env	*node;
-	char	*dest;
+	// char	*dest;
 
 	i = 1;
 	while (cmd_param[i])
 	{
-		dest = ft_strchr(cmd_param[i], '=');
-		if (dest || ft_export_parcing(cmd_param[i]))
-		{
-			if (ft_export_parcing(cmd_param[i]) == 0)
+		// dest = ft_strchr(cmd_param[i], '=');
+		// if (dest || ft_export_parcing(cmd_param[i]))
+		// if (ft_export_parcing(cmd_param[i]))
+		// {
+			if (ft_export_parcing(cmd_param[i]))
+			{
 				ft_set_envirements1(env, cmd_param[i], &node, &new);
+			}
 			else
 			{
 				ft_print_error_fd("minishell: export: `", cmd_param[i],
 					"':  not a valid identifier\n");
 				return (1);
 			}
-		}
+		// }
 		i++;
 	}
 	return (0);

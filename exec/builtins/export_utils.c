@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   export_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kbelmajd <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: kbelmajd <kbelmajd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 19:56:53 by kbelmajd          #+#    #+#             */
-/*   Updated: 2024/11/30 19:57:05 by kbelmajd         ###   ########.fr       */
+/*   Updated: 2024/12/03 21:14:26 by kbelmajd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "../exec.h"
 
 int	ft_export_parcing(char *s)
@@ -16,16 +17,17 @@ int	ft_export_parcing(char *s)
 	int	i;
 
 	i = 0;
-	if ((ft_isalpha(s[i]) || s[i] == '_'))
-		i++;
-	else
+	if (ft_isalpha(s[i]) == 0 || s[i] != '_')
 		return (1);
-	while (s[i] && s[i] != '=')
+	// if ((ft_isalpha(s[i]) || s[i] == '_'))
+	// 	i++;
+	// else
+	// 	return (1);
+	while (s[i])
 	{
-		if (ft_isalnum(s[i]) || s[i] == '_')
-			i++;
-		else
+		if (!ft_isalnum(s[i]) || s[i] != '_' || s[i] != '=')
 			return (1);
+		i++;
 	}
 	return (0);
 }

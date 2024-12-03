@@ -11,7 +11,6 @@ SRCS = parsing/dollar_env.c \
        parsing/create_token.c \
        parsing/dollar_replace.c \
        parsing/list_token.c \
-       main.c \
        parsing/ms_utils.c \
        parsing/parsing_utils.c \
        parsing/error.c \
@@ -40,7 +39,8 @@ SRCS = parsing/dollar_env.c \
        exec/builtins/pwd.c \
        exec/builtins/env_cmp.c \
        exec/builtins/print.c \
-       exec/builtins/exit.c
+       exec/builtins/exit.c \
+       main.c \
        
 LIBFT_LIB = libft/libft.a
 MAKE_EXEC = 

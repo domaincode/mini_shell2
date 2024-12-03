@@ -6,7 +6,7 @@
 /*   By: kbelmajd <kbelmajd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 19:57:58 by kbelmajd          #+#    #+#             */
-/*   Updated: 2024/12/03 17:09:34 by kbelmajd         ###   ########.fr       */
+/*   Updated: 2024/12/03 21:06:19 by kbelmajd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,17 @@ static void	ft_priiiiint(char *s)
 	int	i;
 
 	i = -1;
-	while (s && s[++i])
-	{
+	while (s && s[++i] && s[i] != '=')
 		printf("%c", s[i]);
-		if (s[i] == '=')
+	while (s && s[i])
+	{
+		if (s[i] == '=' && i++)
+			printf("=\"");
+		printf("%c", s[i]);
+		i++;
+		if (s[i] == '\0')
 			printf("\"");
 	}
-	printf("\"");
 }
 
 void	ft_print_error_fd(char *s1, char *s2, char *s3)
@@ -61,6 +65,20 @@ void	ft_print_export(t_env *env)
 	ft_free_env(tmp);
 }
 
+bool func(char *s)
+{
+	int i;
+
+	i = 0;
+	while (s && s[i])
+	{
+		if (s[i] == '=')
+			return (true);
+		i++;
+	}
+	return (false);
+}
+
 void	ft_print_env(t_env *env)
 {
 	t_env	*tmp;
@@ -71,8 +89,10 @@ void	ft_print_env(t_env *env)
 	while (env->next != tmp)
 	{
 		i++;
-		printf("%s\n", env->str);
+		if (func(env->str) == true)
+			printf("%s\n", env->str);
 		env = env->next;
 	}
-	printf("%s\n", env->str);
+	if (func(env->str) == true)
+		printf("%s\n", env->str);
 }

@@ -6,29 +6,44 @@
 /*   By: kbelmajd <kbelmajd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 16:33:19 by kbelmajd          #+#    #+#             */
-/*   Updated: 2024/12/03 13:47:45 by kbelmajd         ###   ########.fr       */
+/*   Updated: 2024/12/03 20:47:10 by kbelmajd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../exec.h"
 
+int	ft_strcmp(const char *s1, const char *s2)
+{
+	unsigned int	i;
+
+	i = 0;
+	while ((s1[i] && s2[i]))
+	{
+		if (s1[i] == s2[i])
+			i++;
+		else
+			break ;
+	}
+	return (s1[i] - s2[i]);
+}
+
 bool	check_builtins(char *str)
 {
 	if (str == NULL)
 		return (false);
-	if (!ft_strncmp(str, "echo", ft_strlen(str)))
+	else if (!ft_strcmp(str, "echo"))
 		return (true);
-	if (!ft_strncmp(str, "cd", ft_strlen(str)))
+	else if (!ft_strcmp(str, "cd"))
 		return (true);
-	if (!ft_strncmp(str, "pwd", ft_strlen(str)))
+	else if (!ft_strcmp(str, "pwd"))
 		return (true);
-	if (!ft_strncmp(str, "export", ft_strlen(str)))
+	else if (!ft_strcmp(str, "export"))
 		return (true);
-	if (!ft_strncmp(str, "unset", ft_strlen(str)))
+	else if (!ft_strcmp(str, "unset"))
 		return (true);
-	if (!ft_strncmp(str, "env", ft_strlen(str)))
+	else if (!ft_strcmp(str, "env"))
 		return (true);
-	if (!ft_strncmp(str, "exit", ft_strlen(str)))
+	else if (!ft_strcmp(str, "exit"))
 		return (true);
 	return (false);
 }
@@ -38,19 +53,19 @@ int	ft_exec_builtins(t_cmd *stack, t_data *data)
 	char	*cmd;
 
 	cmd = stack->cmd_param[0];
-	if (!ft_strncmp(cmd, "echo", ft_strlen(cmd)))
+	if (!ft_strcmp(cmd, "echo"))
 		data->exit_code = ft_echo(stack->cmd_param);
-	if (!ft_strncmp(cmd, "cd", ft_strlen(cmd)))
+	else if (!ft_strcmp(cmd, "cd"))
 		data->exit_code = ft_cd(stack->cmd_param);
-	if (!ft_strncmp(cmd, "pwd", ft_strlen(cmd)))
+	else if (!ft_strcmp(cmd, "pwd"))
 		data->exit_code = ft_pwd();
-	if (!ft_strncmp(cmd, "env", ft_strlen(cmd)))
+	else if (!ft_strcmp(cmd, "env"))
 		data->exit_code = ft_env(data->env);
-	if (!ft_strncmp(cmd, "export", ft_strlen(cmd)))
+	else if (!ft_strcmp(cmd, "export"))
 		data->exit_code = ft_export(data->env, stack->cmd_param);
-	if (!ft_strncmp(cmd, "unset", ft_strlen(cmd)))
+	else if (!ft_strcmp(cmd, "unset"))
 		data->exit_code = ft_unset(&data->env, stack->cmd_param);
-	if (!ft_strncmp(cmd, "exit", ft_strlen(cmd)))
+	else if (!ft_strcmp(cmd, "exit"))
 	{
 		data->exit_code = ft_exit(stack);
 		exit(data->exit_code);

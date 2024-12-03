@@ -6,7 +6,7 @@
 /*   By: kbelmajd <kbelmajd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 19:32:35 by kbelmajd          #+#    #+#             */
-/*   Updated: 2024/12/03 16:49:55 by kbelmajd         ###   ########.fr       */
+/*   Updated: 2024/12/03 19:58:31 by kbelmajd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ static int	ft_exec_all_cmd(t_data *data, t_cmd *stack)
 		g_signal.g_signal_pid = stack->id;
 		if (stack->id == 0)
 		{
+			signals2();
 			set_input_output(stack);
 			ft_exec(stack, data);
 		}
