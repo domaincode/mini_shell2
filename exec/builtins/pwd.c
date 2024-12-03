@@ -12,7 +12,7 @@
 
 #include "../exec.h"
 
-int	ft_pwd(void)
+int	ft_pwd(t_env *env)
 {
 	char	*str;
 
@@ -20,7 +20,9 @@ int	ft_pwd(void)
 	if (str == NULL)
 		return (1);
 	else
-		str = ft_strdup("khalil sohail");
+		str = ft_strdup(ft_get_duplicate(env, "PWD")->str + 4);
+	if (!str)
+		return (0);
 	ft_putstr_fd(str, 1);
 	ft_putstr_fd("\n", 1);
 	free(str);

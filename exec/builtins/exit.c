@@ -37,7 +37,7 @@ static int	ft_no_exit(t_cmd *stack)
 		return (ft_atoi(stack->cmd_param[1]));
 	else if (!ft_numeric_parcing(stack->cmd_param[1]) && stack->cmd_param[2])
 	{
-		ft_putstr_fd("minishell 22: exit: ", 2);
+		ft_putstr_fd("minishell: exit: ", 2);
 		ft_putstr_fd("too many arguments\n", 2);
 		return (1);
 	}

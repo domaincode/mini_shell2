@@ -71,7 +71,7 @@ int	ft_set_envirements(t_env *env, char **cmd_param)
 		// if (dest || ft_export_parcing(cmd_param[i]))
 		// if (ft_export_parcing(cmd_param[i]))
 		// {
-			if (ft_export_parcing(cmd_param[i]))
+			if (ft_export_parcing(cmd_param[i]) == 0)
 			{
 				ft_set_envirements1(env, cmd_param[i], &node, &new);
 			}

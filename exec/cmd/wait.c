@@ -58,7 +58,7 @@ int	ft_exec_builtins(t_cmd *stack, t_data *data)
 	else if (!ft_strcmp(cmd, "cd"))
 		data->exit_code = ft_cd(stack->cmd_param);
 	else if (!ft_strcmp(cmd, "pwd"))
-		data->exit_code = ft_pwd();
+		data->exit_code = ft_pwd(data->env);
 	else if (!ft_strcmp(cmd, "env"))
 		data->exit_code = ft_env(data->env);
 	else if (!ft_strcmp(cmd, "export"))

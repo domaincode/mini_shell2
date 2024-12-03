@@ -27,7 +27,7 @@ int		ft_echo(char **args);
 int		ft_env(t_env *envlist);
 int		ft_export(t_env *env, char **cmd_param);
 int		ft_unset(t_env **env, char **cmd_param);
-int		ft_pwd(void);
+int		ft_pwd(t_env *env);
 int		ft_exit(t_cmd *stack);
 void	ft_print_error_fd(char *s1, char *s2, char *s3);
 

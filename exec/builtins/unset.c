@@ -31,6 +31,8 @@ static t_env	*ft_get_duplicate1(t_env *env, char *to_find)
 {
 	t_env	*tmp;
 
+	if (to_find && to_find[0] == '_' && (to_find[1] == '=' || to_find[1] == '\0'))
+		return (NULL);
 	tmp = env;
 	while (env->next != tmp)
 	{
