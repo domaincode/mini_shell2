@@ -6,11 +6,25 @@
 /*   By: kbelmajd <kbelmajd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 19:57:58 by kbelmajd          #+#    #+#             */
-/*   Updated: 2024/12/03 13:27:58 by kbelmajd         ###   ########.fr       */
+/*   Updated: 2024/12/03 17:09:34 by kbelmajd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../exec.h"
+
+static void	ft_priiiiint(char *s)
+{
+	int	i;
+
+	i = -1;
+	while (s && s[++i])
+	{
+		printf("%c", s[i]);
+		if (s[i] == '=')
+			printf("\"");
+	}
+	printf("\"");
+}
 
 void	ft_print_error_fd(char *s1, char *s2, char *s3)
 {
@@ -39,7 +53,9 @@ void	ft_print_export(t_env *env)
 	tmp = env;
 	while (env)
 	{
-		printf("%s %s\n", "declare -x ", env->str);
+		printf("%s ", "declare -x ");
+		ft_priiiiint(env->str);
+		printf("\n");
 		env = env->next;
 	}
 	ft_free_env(tmp);

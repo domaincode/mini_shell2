@@ -6,7 +6,7 @@
 /*   By: kbelmajd <kbelmajd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 00:21:58 by mel-mans          #+#    #+#             */
-/*   Updated: 2024/12/03 14:53:21 by kbelmajd         ###   ########.fr       */
+/*   Updated: 2024/12/03 17:19:53 by kbelmajd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,10 +67,10 @@ typedef struct s_data
 
 typedef struct s_signal
 {
-	pid_t g_signal_pid;
-	bool	signal_flag;
-	
-}			t_signal;
+	pid_t			g_signal_pid;
+	bool			signal_flag;
+
+}					t_signal;
 
 extern t_signal		g_signal;
 
@@ -115,6 +115,7 @@ size_t				len_cmd(t_cmd *list);
 int					here_doc(t_data *data, char *word);
 bool				get_infile(t_data *data, t_token *token, t_cmd *cmd);
 void				signals(void);
-void				free_reset(t_data *data);
+void				exec_free_reset(t_data *data);
+void				free_cmd_circle(t_cmd **list);
 
 #endif

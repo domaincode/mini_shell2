@@ -6,14 +6,14 @@
 /*   By: kbelmajd <kbelmajd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 01:36:50 by kbelmajd          #+#    #+#             */
-/*   Updated: 2024/12/03 15:16:20 by kbelmajd         ###   ########.fr       */
+/*   Updated: 2024/12/03 17:19:45 by kbelmajd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./exec/exec.h"
 #include "parsing/parsing.h"
 
-t_signal g_signal;
+t_signal	g_signal;
 
 int	make_env(t_data *data, char **env)
 {
@@ -84,7 +84,7 @@ bool	parseline(t_data *data, char *line)
 	if (!data->token || !create_list_cmd(data))
 	{
 		free_token(&data->token);
-		free_cmd(&data->cmd);
+		free_cmd_circle(&data->cmd);
 		return (false);
 	}
 	return (check_pipe(data));
@@ -102,7 +102,7 @@ int	main(int argc, char **argv, char **env)
 			return (0);
 		while (1)
 		{
-			data.cmd = NULL;
+			 data.cmd = NULL;
 			line = readline("minishell> ");
 			if (g_signal.signal_flag)
 				data.exit_code = 130;
@@ -113,9 +113,7 @@ int	main(int argc, char **argv, char **env)
 			add_history(line);
 			if (!parseline(&data, line))
 				continue ;
-			if (ft_execution(&data))
-				continue ;
-			free_reset(&data);
+			exec_free_reset(&data);
 		}
 	}
 	return (0);
