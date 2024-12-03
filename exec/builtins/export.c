@@ -40,12 +40,17 @@ void	ft_sort(t_env *env)
 void	ft_set_envirements1(t_env *env, char *cmd_param, t_env **node,
 		t_env **new)
 {
+	char *dest;
+
 	*node = ft_get_duplicate(env, cmd_param);
-	if (*node)
+	dest = ft_strchr(cmd_param, '=');
+	if (*node && dest)
 	{
 		free((*node)->str);
 		(*node)->str = ft_strdup(cmd_param);
 	}
+	else if(*node && !dest)
+		return ;
 	else
 	{
 		*node = ft_last_env(env);
@@ -62,16 +67,12 @@ int	ft_set_envirements(t_env *env, char **cmd_param)
 	int		i;
 	t_env	*new;
 	t_env	*node;
-	// char	*dest;
+	 //char	*dest;
 
 	i = 1;
 	while (cmd_param[i])
 	{
-		// dest = ft_strchr(cmd_param[i], '=');
-		// if (dest || ft_export_parcing(cmd_param[i]))
-		// if (ft_export_parcing(cmd_param[i]))
-		// {
-			if (ft_export_parcing(cmd_param[i]) == 0)
+			if (ft_export_parcing(cmd_param[i]) == 0 )
 			{
 				ft_set_envirements1(env, cmd_param[i], &node, &new);
 			}
@@ -81,7 +82,6 @@ int	ft_set_envirements(t_env *env, char **cmd_param)
 					"':  not a valid identifier\n");
 				return (1);
 			}
-		// }
 		i++;
 	}
 	return (0);
