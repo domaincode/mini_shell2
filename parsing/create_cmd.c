@@ -1,10 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   create_cmd.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mel-mans <mel-mans@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/12/03 00:20:11 by mel-mans          #+#    #+#             */
+/*   Updated: 2024/12/03 00:27:36 by mel-mans         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "parsing.h"
 
 static bool	fill_cmd(t_data *data, t_token *tmp)
 {
 	data->cmd->prev->cmd_param = get_param(data, tmp);
-	if (!get_infile(data, tmp, data->cmd->prev) && data->cmd->prev->infile !=
-		-1)
+	if (!get_infile(data, tmp, data->cmd->prev) && \
+	data->cmd->prev->infile != -1)
 		return (false);
 	if (data->cmd->prev->infile == -1)
 	{
@@ -12,8 +24,8 @@ static bool	fill_cmd(t_data *data, t_token *tmp)
 		data->cmd->prev->outfile = -1;
 		return (true);
 	}
-	if (!get_outfile(tmp, data->cmd->prev, data) && data->cmd->prev->outfile !=
-		-1)
+	if (!get_outfile(tmp, data->cmd->prev, data) && \
+	data->cmd->prev->outfile != -1)
 		return (false);
 	if (data->cmd->prev->outfile == -1)
 	{

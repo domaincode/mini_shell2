@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   free.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mel-mans <mel-mans@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/12/03 00:20:24 by mel-mans          #+#    #+#             */
+/*   Updated: 2024/12/03 00:25:33 by mel-mans         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "parsing.h"
 
 void	free_array(char **arr)
@@ -35,7 +47,6 @@ void	free_all(t_data *data, char *err, int ext)
 {
 	// if (data->token)
 	// 	free_token(&data->token);
-	// printf("parcing errrro\n");
 	if(data->envp)
 		free(data->envp);
 	if (data->env)
