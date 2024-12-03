@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kbelmajd <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: kbelmajd <kbelmajd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 16:29:21 by kbelmajd          #+#    #+#             */
-/*   Updated: 2024/12/01 14:42:27 by kbelmajd         ###   ########.fr       */
+/*   Updated: 2024/12/03 14:04:41 by kbelmajd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include "../parsing/parsing.h"
 
-int		ft_check_cmd(t_cmd *stack, t_env *env, t_data *data);
+int		ft_check_cmd(t_cmd *stack, t_data *data);
 bool	check_builtins(char *str);
 int		ft_exec_builtins(t_cmd *stack, t_data *data);
 int		ft_wait(t_data *data);
@@ -26,9 +26,10 @@ int		ft_cd(char **cmd_param);
 int		ft_echo(char **args);
 int		ft_env(t_env *envlist);
 int		ft_export(t_env *env, char **cmd_param);
-int		ft_unset(t_env *env, char **cmd_param);
+int		ft_unset(t_env **env, char **cmd_param);
 int		ft_pwd(void);
 int		ft_exit(t_cmd *stack);
+void	ft_print_error_fd(char *s1, char *s2, char *s3);
 
 int		ft_env_cmp(char *s1, char *s2);
 int		set_input_output(t_cmd *stack);

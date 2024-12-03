@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   set_env.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kbelmajd <kbelmajd@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/12/03 13:59:25 by kbelmajd          #+#    #+#             */
+/*   Updated: 2024/12/03 14:02:47 by kbelmajd         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../exec.h"
 
 t_env	*ft_last_env(t_env *env)
@@ -47,9 +59,9 @@ void	ft_env_add_back(t_env **list, t_env *node)
 
 t_env	*ft_env_setup(t_env *env)
 {
-	t_env *stack;
-	t_env *node;
-	t_env *tmp;
+	t_env	*stack;
+	t_env	*node;
+	t_env	*tmp;
 
 	tmp = env;
 	stack = NULL;

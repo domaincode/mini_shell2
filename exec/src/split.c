@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   split.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kbelmajd <kbelmajd@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/12/03 13:59:25 by kbelmajd          #+#    #+#             */
+/*   Updated: 2024/12/03 14:03:05 by kbelmajd         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../exec.h"
 
 static size_t	ft_strnbr(char const *s, char c)
@@ -64,8 +76,8 @@ static char	**ft_strsplit(char const *s, char c, char **array)
 
 char	**my_split(char const *s, char c)
 {
-	char **array;
-	size_t nbr;
+	char	**array;
+	size_t	nbr;
 
 	nbr = ft_strnbr(s, c);
 	array = (char **)malloc((nbr + 1) * sizeof(char *));

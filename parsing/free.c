@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-mans <mel-mans@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kbelmajd <kbelmajd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 00:20:24 by mel-mans          #+#    #+#             */
-/*   Updated: 2024/12/03 00:25:33 by mel-mans         ###   ########.fr       */
+/*   Updated: 2024/12/03 14:39:48 by kbelmajd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,6 @@ bool	print_error_token(t_token *token, t_data *data)
 
 void	free_all(t_data *data, char *err, int ext)
 {
-	// if (data->token)
-	// 	free_token(&data->token);
-	if(data->envp)
-		free(data->envp);
 	if (data->env)
 		free_list(&data->env);
 	if (err)
@@ -56,6 +52,8 @@ void	free_all(t_data *data, char *err, int ext)
 	rl_clear_history();
 	if (!access("/tmp/.heredoc.tmp", F_OK))
 		unlink("/tmp/.heredoc.tmp");
+	if (ext == 130)
+		exit(0);
 	if (ext != -1)
 		exit(ext);
 }

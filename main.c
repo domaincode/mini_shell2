@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kbelmajd <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: kbelmajd <kbelmajd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 01:36:50 by kbelmajd          #+#    #+#             */
-/*   Updated: 2024/12/03 01:39:41 by kbelmajd         ###   ########.fr       */
+/*   Updated: 2024/12/03 15:16:20 by kbelmajd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./exec/exec.h"
 #include "parsing/parsing.h"
 
-pid_t	g_signal_pid;
+t_signal g_signal;
 
 int	make_env(t_data *data, char **env)
 {
@@ -45,7 +45,8 @@ void	init_data(t_data *data)
 	data->cmd = NULL;
 	data->exit_code = 0;
 	signals();
-	g_signal_pid = 0;
+	g_signal.g_signal_pid = 0;
+	g_signal.signal_flag = 0;
 }
 
 bool	empty_line(char *line)
@@ -103,6 +104,8 @@ int	main(int argc, char **argv, char **env)
 		{
 			data.cmd = NULL;
 			line = readline("minishell> ");
+			if (g_signal.signal_flag)
+				data.exit_code = 130;
 			if (!line)
 				free_all(&data, "exit\n", data.exit_code);
 			if (empty_line(line))

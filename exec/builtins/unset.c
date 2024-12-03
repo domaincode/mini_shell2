@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kbelmajd <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: kbelmajd <kbelmajd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 19:59:19 by kbelmajd          #+#    #+#             */
-/*   Updated: 2024/11/30 19:59:23 by kbelmajd         ###   ########.fr       */
+/*   Updated: 2024/12/03 13:26:08 by kbelmajd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,21 +45,21 @@ static t_env	*ft_get_duplicate1(t_env *env, char *to_find)
 	return (NULL);
 }
 
-int	ft_unset(t_env *env, char **cmd_param)
+int	ft_unset(t_env **env, char **cmd_param)
 {
 	t_env	*node;
 	int		i;
 
 	i = 1;
-	if (cmd_param[1] && !strcmp(cmd_param[1], "SHELL"))
-		return (1);
 	while (cmd_param[i])
 	{
-		node = ft_get_duplicate1(env, cmd_param[i]);
+		node = ft_get_duplicate1(*env, cmd_param[i]);
 		if (node)
 		{
 			node->prev->next = node->next;
 			node->next->prev = node->prev;
+			if (!ft_strncmp((*env)->str, node->str, ft_strlen(node->str)))
+				*env = node->next;
 			free(node->str);
 			free(node);
 		}

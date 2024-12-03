@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kbelmajd <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: kbelmajd <kbelmajd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 16:36:23 by kbelmajd          #+#    #+#             */
-/*   Updated: 2024/11/30 16:36:29 by kbelmajd         ###   ########.fr       */
+/*   Updated: 2024/12/03 13:13:40 by kbelmajd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "../exec.h"
 
 int	ft_cd(char **cmd_param)
@@ -17,7 +18,6 @@ int	ft_cd(char **cmd_param)
 		return (1);
 	if (chdir(cmd_param[1]) == -1)
 	{
-		// printf("heererrerere\n");
 		perror("cd");
 		return (1);
 	}

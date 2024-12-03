@@ -3,20 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   free_reset.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kbelmajd <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: kbelmajd <kbelmajd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 01:26:22 by kbelmajd          #+#    #+#             */
-/*   Updated: 2024/12/03 01:34:59 by kbelmajd         ###   ########.fr       */
+/*   Updated: 2024/12/03 15:05:37 by kbelmajd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "parsing.h"
-# include "../exec/exec.h"
+#include "../exec/exec.h"
+#include "parsing.h"
 
 void	free_reset(t_data *data)
 {
 	ft_free_stack(data->cmd);
-	free_cmd(&data->cmd);    			
+	free_cmd(&data->cmd);
 	free_token(&data->token);
-	g_signal_pid = 0;
+	if (data->envp)
+		free(data->envp);
+	g_signal.g_signal_pid = 0;
+	g_signal.signal_flag = false;
 }

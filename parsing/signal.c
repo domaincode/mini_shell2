@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-mans <mel-mans@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kbelmajd <kbelmajd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 00:22:07 by mel-mans          #+#    #+#             */
-/*   Updated: 2024/12/03 00:46:35 by mel-mans         ###   ########.fr       */
+/*   Updated: 2024/12/03 14:52:20 by kbelmajd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,11 @@ static void	handle_sigint(int code)
 	(void)code;
 	printf("\n");
 	clear_rl_line();
-	if (g_signal_pid == 0)
+	if (g_signal.g_signal_pid == 0)
+	{
+		g_signal.signal_flag = true;
 		rl_redisplay();
+	}
 }
 
 void	signals(void)

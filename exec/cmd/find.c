@@ -3,17 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   find.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kbelmajd <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: kbelmajd <kbelmajd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 15:46:18 by kbelmajd          #+#    #+#             */
-/*   Updated: 2024/12/01 14:38:38 by kbelmajd         ###   ########.fr       */
+/*   Updated: 2024/12/03 13:58:45 by kbelmajd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "../exec.h"
 
 static char	*find_builtins(char *str)
 {
-	int acc_return ;
+	int	acc_return;
+
 	if (check_builtins(str) == true)
 	{
 		return (ft_strdup(str));
@@ -38,8 +40,8 @@ static char	*find_programme(char *str, t_env *env)
 	char	*path;
 	char	*new_path;
 	int		i;
+	int		acc_return;
 
-	int acc_return ;
 	i = 0;
 	arr = my_split(ft_get_path(env), ':');
 	if (!arr || !*arr)
@@ -58,18 +60,29 @@ static char	*find_programme(char *str, t_env *env)
 	return (new_path);
 }
 
-int	ft_check_cmd(t_cmd *stack, t_env *env, t_data *data)
+static char	*ft_its_abin(t_cmd *stack, t_data *data)
 {
-	if (stack->skip_cmd == true || (stack->next
-			&& stack->next->skip_cmd == true))
+	stack->path = find_programme(stack->cmd_param[0], data->env);
+	if (stack->path == NULL)
+	{
+		stack->skip_cmd = true;
+		ft_putstr_fd(stack->cmd_param[0], 2);
+		ft_putstr_fd(": command not found\n", 2);
+		data->exit_code = 127;
+		return (NULL);
+	}
+	return (stack->path);
+}
+
+int	ft_check_cmd(t_cmd *stack, t_data *data)
+{
+	if (stack->skip_cmd || (stack->next && stack->next->skip_cmd))
 	{
 		data->exit_code = 1;
 		return (1);
 	}
 	if (!stack->cmd_param || !stack->cmd_param[0])
-	{
 		return (1);
-	}
 	stack->path = find_builtins(stack->cmd_param[0]);
 	if (stack->path == NULL && ft_strchr(stack->cmd_param[0], '/'))
 	{
@@ -82,18 +95,9 @@ int	ft_check_cmd(t_cmd *stack, t_env *env, t_data *data)
 	}
 	else if (stack->path == NULL && !ft_strchr(stack->cmd_param[0], '/'))
 	{
-		stack->path = find_programme(stack->cmd_param[0], env);
+		stack->path = ft_its_abin(stack, data);
 		if (stack->path == NULL)
-		{
-			stack->skip_cmd = true;
-			ft_putstr_fd(stack->cmd_param[0], 2);
-			ft_putstr_fd(": command not found\n", 2);
-			data->exit_code = 127;
 			return (1);
-		}
 	}
 	return (0);
-	// echo hi | >./outfiles/outfile01 echo bye >./test_files/invalid_permission
-
-	//cat <"./test_files/infile" | grep hello
 }

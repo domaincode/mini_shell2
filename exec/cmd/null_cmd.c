@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   null_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kbelmajd <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: kbelmajd <kbelmajd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 16:30:10 by kbelmajd          #+#    #+#             */
-/*   Updated: 2024/11/30 16:30:38 by kbelmajd         ###   ########.fr       */
+/*   Updated: 2024/12/03 13:47:10 by kbelmajd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "../exec.h"
 
 int	ft_null(t_cmd *stack)
@@ -58,7 +59,7 @@ void	ft_free_set_null(char **path)
 
 char	*ft_get_path(t_env *env)
 {
-	t_env *tmp;
+	t_env	*tmp;
 
 	tmp = env;
 	while (env->next != tmp)

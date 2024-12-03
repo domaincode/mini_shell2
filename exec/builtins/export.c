@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kbelmajd <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: kbelmajd <kbelmajd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 17:52:59 by kbelmajd          #+#    #+#             */
-/*   Updated: 2024/11/30 17:53:05 by kbelmajd         ###   ########.fr       */
+/*   Updated: 2024/12/03 13:34:03 by kbelmajd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "../exec.h"
 
 void	ft_sort(t_env *env)
@@ -70,15 +71,11 @@ int	ft_set_envirements(t_env *env, char **cmd_param)
 		if (dest || ft_export_parcing(cmd_param[i]))
 		{
 			if (ft_export_parcing(cmd_param[i]) == 0)
-			{
 				ft_set_envirements1(env, cmd_param[i], &node, &new);
-			}
 			else
 			{
-				ft_putstr_fd("minishell: export: `", 2);
-				ft_putstr_fd(cmd_param[i], 2);
-				ft_putstr_fd("': ", 2);
-				ft_putstr_fd(" not a valid identifier\n", 2);
+				ft_print_error_fd("minishell: export: `", cmd_param[i],
+					"':  not a valid identifier\n");
 				return (1);
 			}
 		}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-mans <mel-mans@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kbelmajd <kbelmajd@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 00:21:58 by mel-mans          #+#    #+#             */
-/*   Updated: 2024/12/03 01:33:53 by kbelmajd         ###   ########.fr       */
+/*   Updated: 2024/12/03 14:53:21 by kbelmajd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,6 @@
 # include <sys/wait.h>
 //#include "../exec/exec.h"
 # include <errno.h>
-
-extern pid_t		g_signal_pid;
 
 typedef struct s_token
 {
@@ -66,6 +64,15 @@ typedef struct s_data
 	int				exit_code;
 	bool			sq;
 }					t_data;
+
+typedef struct s_signal
+{
+	pid_t g_signal_pid;
+	bool	signal_flag;
+	
+}			t_signal;
+
+extern t_signal		g_signal;
 
 # define INPUT 1
 # define HEREDOC 2
