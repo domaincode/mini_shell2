@@ -47,6 +47,7 @@ int	ft_check_duplicate(char *s1, char *s2)
 		return (1);
 }
 
+
 t_env	*ft_get_duplicate(t_env *env, char *to_find)
 {
 	t_env	*tmp;
