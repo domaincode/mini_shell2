@@ -6,7 +6,7 @@
 /*   By: mel-mans <mel-mans@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 00:21:58 by mel-mans          #+#    #+#             */
-/*   Updated: 2024/12/03 00:28:26 by mel-mans         ###   ########.fr       */
+/*   Updated: 2024/12/03 01:33:53 by kbelmajd         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,5 +108,6 @@ size_t				len_cmd(t_cmd *list);
 int					here_doc(t_data *data, char *word);
 bool				get_infile(t_data *data, t_token *token, t_cmd *cmd);
 void				signals(void);
+void				free_reset(t_data *data);
 
 #endif

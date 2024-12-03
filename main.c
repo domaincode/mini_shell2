@@ -1,5 +1,17 @@
-#include "parsing/parsing.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kbelmajd <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/12/03 01:36:50 by kbelmajd          #+#    #+#             */
+/*   Updated: 2024/12/03 01:39:41 by kbelmajd         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "./exec/exec.h"
+#include "parsing/parsing.h"
 
 pid_t	g_signal_pid;
 
@@ -31,7 +43,7 @@ void	init_data(t_data *data)
 	data->envp = NULL;
 	data->token = NULL;
 	data->cmd = NULL;
-	//data->exit_code = 0;
+	data->exit_code = 0;
 	signals();
 	g_signal_pid = 0;
 }
@@ -53,7 +65,6 @@ bool	empty_line(char *line)
 
 bool	parseline(t_data *data, char *line)
 {
-	//t_cmd	*tmp;
 	if (open_quote(data, line))
 	{
 		free(line);
@@ -61,7 +72,6 @@ bool	parseline(t_data *data, char *line)
 	}
 	if (!replace_dollar(&line, data) || !create_list_token(&data->token, line))
 		free_all(data, "malloc error\n", 1);
-	//if (*line)
 	free(line);
 	if (data->token && data->token->prev->type == PIPE)
 	{
@@ -76,13 +86,6 @@ bool	parseline(t_data *data, char *line)
 		free_cmd(&data->cmd);
 		return (false);
 	}
-	// tmp = data->cmd;
-	// while (tmp->next != data->cmd)
-	// {
-	// 	printf("infile = %d, outfile = %d\n",  tmp->infile, tmp->outfile);
-	// 	tmp = tmp->next;
-	// }
-	// printf("infile = %d, outfile = %d\n",  tmp->infile, tmp->outfile);
 	return (check_pipe(data));
 }
 
@@ -90,20 +93,14 @@ int	main(int argc, char **argv, char **env)
 {
 	t_data	data;
 	char	*line;
-	//printf("%d\n", getpid());
 
 	if (argc == 1 && argv[0])
 	{
 		init_data(&data);
-		data.exit_code = 0;
 		if (!make_env(&data, env))
-		{
-			return(0);
-			//free_all(&data, "", 1);
-		}
+			return (0);
 		while (1)
 		{
-			//init_data(&data);
 			data.cmd = NULL;
 			line = readline("minishell> ");
 			if (!line)
@@ -113,19 +110,10 @@ int	main(int argc, char **argv, char **env)
 			add_history(line);
 			if (!parseline(&data, line))
 				continue ;
-			if(ft_execution(&data))
-			{
+			if (ft_execution(&data))
 				continue ;
-			}
-			 ft_free_stack(data.cmd);
-			 free_cmd(&data.cmd);    			
-			 free_token(&data.token);
-			//free(line);
-		// 		if (data->envp)
-		// free(data->envp);
+			free_reset(&data);
 		}
-		// rl_clear_history();
-		// free_all(&data, NULL, -1);
 	}
 	return (0);
 }

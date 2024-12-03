@@ -21,6 +21,7 @@ SRCS = parsing/dollar_env.c \
        parsing/list_cmd.c \
        parsing/here_doc.c \
        parsing/signal.c \
+       parsing/free_reset.c \
        exec/cmd/find.c \
        exec/cmd/exec.c \
        exec/cmd/wait.c \
