@@ -121,7 +121,7 @@ int	ft_set_envirements(t_env *env, char **cmd_param)
 	i = 1;
 	while (cmd_param[i])
 	{
-			if (cmd_param[i][0] == '_' && (cmd_param[i][1] == '=' || cmd_param[i][1] == '\0'))
+			if (!ft_strcmp(cmd_param[i], "_"))
 			{
 				i++;
 				continue;

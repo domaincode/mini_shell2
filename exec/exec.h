@@ -55,5 +55,6 @@ int		ft_export_parcing(char *s);
 
 void	ft_free_set_null(char **path);
 char	*ft_get_path(t_env *env);
+int	    ft_strcmp(const char *s1, const char *s2);
 
 #endif

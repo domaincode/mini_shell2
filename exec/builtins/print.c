@@ -57,10 +57,15 @@ void	ft_print_export(t_env *env)
 	tmp = env;
 	while (env)
 	{
-		printf("%s ", "declare -x ");
-		ft_priiiiint(env->str);
-		printf("\n");
-		env = env->next;
+		if(env->str[0] == '_' && env->str[1] == '=')
+				env = env->next;
+		else 
+		{
+			printf("%s ", "declare -x ");
+			ft_priiiiint(env->str);
+			printf("\n");
+			env = env->next;
+		}
 	}
 	ft_free_env(tmp);
 }

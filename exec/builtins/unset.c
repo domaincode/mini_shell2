@@ -57,7 +57,7 @@ int	ft_unset(t_env **env, char **cmd_param)
 	while (cmd_param[i])
 	{
 		dest = ft_strchr(cmd_param[i], '=');
-		if(dest)
+		if(dest || !ft_strcmp(cmd_param[i], "_"))
 		{
 			i++;
 			continue;
