@@ -144,10 +144,7 @@ int	ft_export(t_env *env, char **cmd_param)
 	t_env	*my_env;
 
 	if(env == NULL)
-	{
-		printf("env null\n");
 		return (0);
-	}
 	if (cmd_param[1])
 		return (ft_set_envirements(env, cmd_param));
 	else
