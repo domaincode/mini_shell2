@@ -31,8 +31,6 @@ static int	unset_check_duplicate(char *s1, char *s2)
 {
 	t_env	*tmp;
 
-	if (to_find && to_find[0] == '_' && (to_find[1] == '=' || to_find[1] == '\0'))
-		return (NULL);
 	tmp = env;
 	while (env->next != tmp)
 	{
@@ -54,6 +52,8 @@ int	ft_unset(t_env **env, char **cmd_param)
 	int		i;
 
 	i = 1;
+	if(*env == NULL)
+		return (0);
 	while (cmd_param[i])
 	{
 		dest = ft_strchr(cmd_param[i], '=');
@@ -63,7 +63,13 @@ int	ft_unset(t_env **env, char **cmd_param)
 			continue;
 		}
 		node = unset_get_duplicate(*env, cmd_param[i]);
-		if (node)
+		if(node && node->next == node)
+		{
+			free(node->str);
+			free(node);
+			*env = NULL;
+		}
+		else if (node)
 		{
 			node->prev->next = node->next;
 			node->next->prev = node->prev;

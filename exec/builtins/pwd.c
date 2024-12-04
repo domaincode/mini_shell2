@@ -18,8 +18,6 @@ int	ft_pwd(t_env *env)
 
 	(void) env;
 	str = getcwd(NULL, 0);
-	if (str == NULL)
-		str = ft_strdup(export_get_duplicate(env, "PWD")->str + 4);
 	if (!str)
 		return (0);
 	ft_putstr_fd(str, 1);

@@ -14,6 +14,8 @@
 
 int	ft_env(t_env *env)
 {
+	if(env == NULL)
+		return (0);
 	ft_print_env(env);
 	return (0);
 }

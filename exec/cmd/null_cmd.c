@@ -33,6 +33,8 @@ char	**lst_to_arr(t_env *env)
 	int		i;
 
 	dest = NULL;
+	if(env == NULL)
+		return NULL;
 	i = 0;
 	lst = env;
 	dest = malloc(sizeof(char *) * (len_list(lst) + 1));
@@ -60,7 +62,8 @@ void	ft_free_set_null(char **path)
 char	*ft_get_path(t_env *env)
 {
 	t_env	*tmp;
-
+	if(env == NULL)
+		return NULL;
 	tmp = env;
 	while (env->next != tmp)
 	{

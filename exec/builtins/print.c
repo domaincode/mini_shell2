@@ -82,13 +82,10 @@ bool func(char *s)
 void	ft_print_env(t_env *env)
 {
 	t_env	*tmp;
-	int		i;
 
-	i = 0;
 	tmp = env;
 	while (env->next != tmp)
 	{
-		i++;
 		if (func(env->str) == true)
 			printf("%s\n", env->str);
 		env = env->next;
