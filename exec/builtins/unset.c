@@ -12,7 +12,7 @@
 
 #include "../exec.h"
 
-static int	ft_check_duplicate1(char *s1, char *s2)
+static int	unset_check_duplicate(char *s1, char *s2)
 {
 	int	i;
 
@@ -21,13 +21,13 @@ static int	ft_check_duplicate1(char *s1, char *s2)
 	{
 		i++;
 	}
-	if (s1[i] == '=' && s2[i] == 0)
+	if ((s1[i] ==  s2[i]) || (s1[i] == '=' && !s2[i]) )
 		return (0);
 	else
 		return (1);
 }
 
-static t_env	*ft_get_duplicate1(t_env *env, char *to_find)
+ static t_env	*unset_get_duplicate(t_env *env, char *to_find)
 {
 	t_env	*tmp;
 
@@ -36,13 +36,13 @@ static t_env	*ft_get_duplicate1(t_env *env, char *to_find)
 	tmp = env;
 	while (env->next != tmp)
 	{
-		if (ft_check_duplicate1(env->str, to_find) == 0)
+		if (unset_check_duplicate(env->str, to_find) == 0)
 		{
 			return (env);
 		}
 		env = env->next;
 	}
-	if (ft_check_duplicate1(env->str, to_find) == 0)
+	if (unset_check_duplicate(env->str, to_find) == 0)
 		return (env);
 	return (NULL);
 }
@@ -50,12 +50,19 @@ static t_env	*ft_get_duplicate1(t_env *env, char *to_find)
 int	ft_unset(t_env **env, char **cmd_param)
 {
 	t_env	*node;
+	char	*dest;
 	int		i;
 
 	i = 1;
 	while (cmd_param[i])
 	{
-		node = ft_get_duplicate1(*env, cmd_param[i]);
+		dest = ft_strchr(cmd_param[i], '=');
+		if(dest)
+		{
+			i++;
+			continue;
+		}
+		node = unset_get_duplicate(*env, cmd_param[i]);
 		if (node)
 		{
 			node->prev->next = node->next;

@@ -16,15 +16,15 @@ static int	ft_check_options(char *str)
 	int	i;
 
 	i = 1;
-	if (str[0] != '-')
-		return (0);
+	if (str[0] != '-' || !str[i])
+		return (1);
 	while (str[i])
 	{
 		if (str[i] != 'n')
-			return (0);
+			return (1);
 		i++;
 	}
-	return (1);
+	return (0);
 }
 
 int	ft_echo(char **args)
@@ -34,7 +34,7 @@ int	ft_echo(char **args)
 
 	i = 1;
 	indice = 0;
-	while (args[i] && ft_check_options(args[i]) == 1)
+	while (args[i] && ft_check_options(args[i]) == 0)
 	{
 		indice = 1;
 		i++;

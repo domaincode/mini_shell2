@@ -22,13 +22,13 @@ int		ft_wait(t_data *data);
 
 int		ft_execution(t_data *data);
 
-int		ft_cd(char **cmd_param);
+int		ft_cd(t_data *data, char **cmd_param);
 int		ft_echo(char **args);
 int		ft_env(t_env *envlist);
 int		ft_export(t_env *env, char **cmd_param);
 int		ft_unset(t_env **env, char **cmd_param);
 int		ft_pwd(t_env *env);
-int		ft_exit(t_cmd *stack);
+int		ft_exit(t_cmd *stack, t_data *data);
 void	ft_print_error_fd(char *s1, char *s2, char *s3);
 
 int		ft_env_cmp(char *s1, char *s2);
@@ -45,14 +45,13 @@ void	ft_free_env(t_env *env);
 t_env	*ft_last_env(t_env *env);
 void	ft_print_export(t_env *env);
 
-t_env	*ft_get_duplicate(t_env *env, char *to_find);
+t_env	*export_get_duplicate(t_env *env, char *to_find);
 
 char	**my_split(char const *s, char c);
 int		ft_null(t_cmd *stack);
 char	**lst_to_arr(t_env *env);
 
 int		ft_export_parcing(char *s);
-t_env	*ft_get_duplicate(t_env *env, char *to_find);
 
 void	ft_free_set_null(char **path);
 char	*ft_get_path(t_env *env);

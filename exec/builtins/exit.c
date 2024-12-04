@@ -51,19 +51,19 @@ static int	ft_no_exit(t_cmd *stack)
 	return (0);
 }
 
-int	ft_exit(t_cmd *stack)
+int	ft_exit(t_cmd *stack, t_data *data)
 {
 	if (stack->prev || stack->next)
 		return (ft_no_exit(stack));
 	else if (!stack->cmd_param[1])
 	{
 		printf("exit\n");
-		return (0);
+		exit (data->exit_code);
 	}
 	else if (!ft_numeric_parcing(stack->cmd_param[1]) && !stack->cmd_param[2])
 	{
 		printf("exit\n");
-		return (ft_atoi(stack->cmd_param[1]));
+		exit (ft_atoi(stack->cmd_param[1]));
 	}
 	else if (!ft_numeric_parcing(stack->cmd_param[1]) && stack->cmd_param[2])
 	{
@@ -75,6 +75,6 @@ int	ft_exit(t_cmd *stack)
 	{
 		ft_print_error_fd("minishell: exit: ", stack->cmd_param[1],
 			": numeric argument required\n");
-		return (2);
+		exit (2);
 	}
 }

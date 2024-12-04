@@ -17,6 +17,8 @@ t_env	*ft_last_env(t_env *env)
 	t_env	*tmp;
 
 	tmp = env;
+	if(env == NULL)
+		return NULL;
 	while (env->next != tmp)
 	{
 		env = env->next;

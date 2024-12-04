@@ -56,7 +56,7 @@ int	ft_exec_builtins(t_cmd *stack, t_data *data)
 	if (!ft_strcmp(cmd, "echo"))
 		data->exit_code = ft_echo(stack->cmd_param);
 	else if (!ft_strcmp(cmd, "cd"))
-		data->exit_code = ft_cd(stack->cmd_param);
+		data->exit_code = ft_cd(data, stack->cmd_param);
 	else if (!ft_strcmp(cmd, "pwd"))
 		data->exit_code = ft_pwd(data->env);
 	else if (!ft_strcmp(cmd, "env"))
@@ -66,10 +66,7 @@ int	ft_exec_builtins(t_cmd *stack, t_data *data)
 	else if (!ft_strcmp(cmd, "unset"))
 		data->exit_code = ft_unset(&data->env, stack->cmd_param);
 	else if (!ft_strcmp(cmd, "exit"))
-	{
-		data->exit_code = ft_exit(stack);
-		exit(data->exit_code);
-	}
+		data->exit_code = ft_exit(stack, data);
 	return (data->exit_code);
 }
 

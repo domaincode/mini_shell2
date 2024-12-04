@@ -37,45 +37,97 @@ void	ft_sort(t_env *env)
 	}
 }
 
-void	ft_set_envirements1(t_env *env, char *cmd_param, t_env **node,
-		t_env **new)
+static void ft_add_join(t_env *last, t_env *env, char *oldvar)
+{
+	t_env *new;
+	char *newvar;
+	int i;
+	int j;
+
+	i = 0;
+	j = 0;
+	newvar = malloc(ft_strlen(oldvar));
+	if(!newvar)
+		return ;
+	while(i < (int )ft_strlen(oldvar) - 1)
+	{
+		newvar[i++] = oldvar[j++];
+		if(oldvar[j] == '+')
+			j++;
+	}
+	new = ft_new_env(newvar);
+	last->next = new;
+	new->prev = env->prev;
+	env->prev = new;
+	new->next = env;
+}
+
+static void ft_set_join(t_env *node, char *dest)
+{
+	char *tmp;
+
+	tmp = 	(node)->str;
+	if(ft_strchr((node)->str, '='))
+	{
+		(node)->str = ft_strjoin((node)->str, dest + 1);
+		free(tmp);
+	}
+	else{
+			(node)->str = ft_strjoin((node)->str, dest);
+			free(tmp);
+	}
+
+}
+
+void	ft_set_envirements1(t_env *env, char *cmd_param)
 {
 	char *dest;
+	char *plus;
+	t_env *node;
+	t_env *new;
 
-	*node = ft_get_duplicate(env, cmd_param);
+	node = export_get_duplicate(env, cmd_param);
+	new = ft_last_env(env);
 	dest = ft_strchr(cmd_param, '=');
-	if (*node && dest)
+	plus = 	ft_strchr(cmd_param, '+');
+	if(node && (plus && plus < dest))
 	{
-		free((*node)->str);
-		(*node)->str = ft_strdup(cmd_param);
+		ft_set_join(node, dest);
 	}
-	else if(*node && !dest)
+	else if (!node && (plus && plus < dest))
+		ft_add_join(new, env, cmd_param);
+	else if (node && dest)
+	{
+		free((node)->str);
+		(node)->str = ft_strdup(cmd_param);
+	}
+	else if(node && !dest)
 		return ;
 	else
 	{
-		*node = ft_last_env(env);
-		*new = ft_new_env(cmd_param);
-		(*node)->next = *new;
-		(*new)->prev = env->prev;
-		env->prev = *new;
-		(*new)->next = env;
+		node = ft_last_env(env);
+		new = ft_new_env(cmd_param);
+		(node)->next = new;
+		(new)->prev = env->prev;
+		env->prev = new;
+		(new)->next = env;
 	}
 }
 
 int	ft_set_envirements(t_env *env, char **cmd_param)
 {
 	int		i;
-	t_env	*new;
-	t_env	*node;
-	 //char	*dest;
 
 	i = 1;
 	while (cmd_param[i])
 	{
-			if (ft_export_parcing(cmd_param[i]) == 0 )
+			if (cmd_param[i][0] == '_' && (cmd_param[i][1] == '=' || cmd_param[i][1] == '\0'))
 			{
-				ft_set_envirements1(env, cmd_param[i], &node, &new);
+				i++;
+				continue;
 			}
+			if (ft_export_parcing(cmd_param[i]) == 0 )
+				ft_set_envirements1(env, cmd_param[i]);
 			else
 			{
 				ft_print_error_fd("minishell: export: `", cmd_param[i],
@@ -92,9 +144,7 @@ int	ft_export(t_env *env, char **cmd_param)
 	t_env	*my_env;
 
 	if (cmd_param[1])
-	{
 		return (ft_set_envirements(env, cmd_param));
-	}
 	else
 	{
 		my_env = ft_env_setup(env);

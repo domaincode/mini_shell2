@@ -21,45 +21,44 @@ int	ft_export_parcing(char *s)
 		return (1);
 	while (s[i] && s[i] != '=')
 	{
-		if (ft_isalnum(s[i]) == 0 && s[i] != '_')
+		if(s[i] == '+' && s[i + 1] == '=')
+			return 0;
+		if ((ft_isalnum(s[i]) == 0 && s[i] != '_'))
 			return (1);
 		i++;
 	}
 	return (0);
 }
 
-int	ft_check_duplicate(char *s1, char *s2)
+static int	export_check_duplicate(char *s1, char *s2)
 {
 	int	i;
 
 	i = 0;
 	while (s1[i] && s1[i] != '=' && s1[i] == s2[i])
-	{
 		i++;
-	}
-	if ((s1[i] == '=' || s1[i] == '\0') && (s2[i] == '=' || s2[i] == '\0'))
+	if ((s1[i] ==  s2[i]) || (s1[i] == '=' && !s2[i]) || (!s1[i] && s2[i] == '=') )
+		return (0);
+	if((s1[i] == '=' || !s1[i]) && (s2[i] == '+'))
 		return (0);
 	else
 		return (1);
 }
 
 
-t_env	*ft_get_duplicate(t_env *env, char *to_find)
+t_env	*export_get_duplicate(t_env *env, char *to_find)
 {
 	t_env	*tmp;
 
-	if (to_find && to_find[0] == '_' && (to_find[1] == '=' || to_find[1] == '\0'))
-		return (NULL);
+
 	tmp = env;
 	while (env->next != tmp)
 	{
-		if (ft_check_duplicate(env->str, to_find) == 0)
-		{
+		if (export_check_duplicate(env->str, to_find) == 0)
 			return (env);
-		}
 		env = env->next;
 	}
-	if (ft_check_duplicate(env->str, to_find) == 0)
+	if (export_check_duplicate(env->str, to_find) == 0)
 		return (env);
 	return (NULL);
 }

@@ -16,11 +16,10 @@ int	ft_pwd(t_env *env)
 {
 	char	*str;
 
+	(void) env;
 	str = getcwd(NULL, 0);
 	if (str == NULL)
-		return (1);
-	else
-		str = ft_strdup(ft_get_duplicate(env, "PWD")->str + 4);
+		str = ft_strdup(export_get_duplicate(env, "PWD")->str + 4);
 	if (!str)
 		return (0);
 	ft_putstr_fd(str, 1);
