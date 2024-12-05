@@ -73,14 +73,18 @@ int	ft_exec_builtins(t_cmd *stack, t_data *data)
 int	ft_wait(t_data *data)
 {
 	int	g_status;
+	t_cmd *stack;
 
-	while (waitpid(-1, &g_status, 0) > 0)
+	stack = data->cmd;
+	while (stack)
 	{
+		waitpid(stack->id, &g_status, 0);
 		if (WIFEXITED(g_status))
 			g_status = WEXITSTATUS(g_status);
 		else if (WIFSIGNALED(g_status))
 			g_status = 128 + WTERMSIG(g_status);
 		data->exit_code = g_status;
+		stack= stack->next;
 	}
 	return (0);
 }

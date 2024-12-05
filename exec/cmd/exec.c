@@ -62,18 +62,16 @@ static int	ft_exec_all_cmd(t_data *data, t_cmd *stack)
 {
 	while (stack)
 	{
-		if (ft_check_cmd(stack, data))
-		{
-			pipe(stack->fpipe);
-			stack = stack->next;
-			continue ;
-		}
 		if (stack->next)
 			pipe(stack->fpipe);
 		stack->id = fork();
 		g_signal.g_signal_pid = stack->id;
 		if (stack->id == 0)
 		{
+			if(ft_check_cmd(stack, data))
+			{
+				exit(data->exit_code);
+			}
 			signals2();
 			set_input_output(stack);
 			ft_exec(stack, data);

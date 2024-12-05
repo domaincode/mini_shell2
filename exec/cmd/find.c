@@ -68,6 +68,7 @@ static char	*ft_its_abin(t_cmd *stack, t_data *data)
 		stack->skip_cmd = true;
 		ft_putstr_fd(stack->cmd_param[0], 2);
 		ft_putstr_fd(": command not found\n", 2);
+		//stack->exit = 127;
 		data->exit_code = 127;
 		return (NULL);
 	}
@@ -97,7 +98,9 @@ int	ft_check_cmd(t_cmd *stack, t_data *data)
 	{
 		stack->path = ft_its_abin(stack, data);
 		if (stack->path == NULL)
-			return (1);
+		{
+			return (127);
+		}
 	}
 	return (0);
 }
